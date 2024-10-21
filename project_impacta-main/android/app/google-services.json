@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "602351514125",
+    "firebase_url": "https://contact-list-firebase-97a94-default-rtdb.firebaseio.com",
+    "project_id": "contact-list-firebase-97a94",
+    "storage_bucket": "contact-list-firebase-97a94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602351514125:android:1f84bb24b75435808e9b44",
+        "android_client_info": {
+          "package_name": "com.example.project_impacta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602351514125-3aronpo8jgvo6t3svd9fuhfc1si9bj4n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvRXv04L0agR9HZj4P7PTy6sdcYXfbnJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602351514125-3aronpo8jgvo6t3svd9fuhfc1si9bj4n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
