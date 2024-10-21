@@ -17,15 +17,20 @@ class CreateContactCubit extends Cubit<CreateContactState> {
     emit(CreateContactInitialState());
   }
 
-  Future<void> createUser(ContactModel document) async {
-    emit(CreateContactLoadingState());
-    final result = await usecase.createUser(document);
-    result.fold((l) {
-      emit(CreateContactErrorState(l));
-      return;
-    }, (r) {
-      emit(CreateContactSuccessState());
-      return;
-    });
+  Future<void> createUser(ContactModel contactModel) async {
+    try {
+      emit(CreateContactLoadingState());
+      final result = await usecase.createUser(contactModel);
+      result.fold((l) {
+        emit(CreateContactErrorState(l));
+        return;
+      }, (r) {
+        emit(CreateContactSuccessState());
+        return;
+      });
+    } catch (e) {
+      emit(CreateContactErrorState(
+          CreateContactUnkownError(message: e.toString())));
+    }
   }
 }

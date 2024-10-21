@@ -3,7 +3,6 @@ import 'package:app_piloto/core/components/widgets/top_bar.dart';
 import 'package:app_piloto/src/modules/contact_list/presenter/screens/contact_list_screen.dart';
 import 'package:app_piloto/src/modules/create_contact/presenter/screens/create_contact_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
