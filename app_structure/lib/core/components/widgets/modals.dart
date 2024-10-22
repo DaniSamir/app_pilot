@@ -2,15 +2,14 @@ import 'package:app_piloto/core/components/styles/app_piloto_colors.dart';
 import 'package:app_piloto/src/modules/home/presenter/index.dart';
 import 'package:flutter/material.dart';
 
-class CreateContactModal {
-  Future<void> createContactErrorModal(BuildContext context) async {
+class AppPilotoModal {
+  Future<void> showErrorModal(BuildContext context, String text) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(45))),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(45))),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -21,7 +20,7 @@ class CreateContactModal {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  'Ops!Ocorreu um erro. Por favor, tente mais tarde!',
+                  text,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
@@ -49,8 +48,7 @@ class CreateContactModal {
                 ),
                 onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const DashBoardScreen()),
+                  MaterialPageRoute(builder: (context) => const DashBoardScreen()),
                 ),
               ),
             ),
@@ -60,14 +58,13 @@ class CreateContactModal {
     );
   }
 
-  Future<void> createContactSuccessModal(BuildContext context) async {
+  Future<void> showSuccessModal(BuildContext context, String text) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(45))),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(45))),
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -78,7 +75,7 @@ class CreateContactModal {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  'Usuário criado com sucesso!',
+                  text,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
@@ -106,8 +103,7 @@ class CreateContactModal {
                 ),
                 onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const DashBoardScreen()),
+                  MaterialPageRoute(builder: (context) => const DashBoardScreen()),
                 ),
               ),
             ),

@@ -8,10 +8,23 @@ class ContactListUsecaseImp implements ContactListUsecase {
   ContactListUsecaseImp({required this.datasource});
 
   @override
-  Future<Either<ContactListFailure, List<ContactModel>?>>
-      getContactList() async {
+  Future<Either<ContactListFailure, List<ContactModel>?>> getContactList() async {
     try {
       final result = await datasource.getContactList();
+      return result.fold((l) {
+        return left(l);
+      }, (r) {
+        return right(r);
+      });
+    } catch (e) {
+      return left(ContactListUnkownError(message: e.toString()));
+    }
+  }
+
+    @override
+  Future<Either<ContactListFailure,bool>> deleteContact(String nameUser) async {
+    try {
+      final result = await datasource.deleteContact(nameUser);
       return result.fold((l) {
         return left(l);
       }, (r) {

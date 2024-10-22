@@ -32,9 +32,9 @@ class _CreateUserState extends State<CreateUser> {
     return BlocConsumer<CreateContactCubit, CreateContactState>(
       listener: (context, state) {
         if (state is CreateContactErrorState) {
-          CreateContactModal().createContactSuccessModal(context);
+          AppPilotoModal().showErrorModal(context, 'Ops! Ocorreu um erro. Tente mais tarde!');
         } else if (state is CreateContactSuccessState) {
-          CreateContactModal().createContactSuccessModal(context);
+          AppPilotoModal().showSuccessModal(context, 'Contato criado com sucesso!');
         }
       },
       bloc: contactCubit,
@@ -44,17 +44,16 @@ class _CreateUserState extends State<CreateUser> {
           appBar: CustomAppBar(
             title: Text(
               'Criar Contato',
-              style: GoogleFonts.comfortaa(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w700,
-                  color: AppPilotoColors().white()),
+              style: GoogleFonts.comfortaa(fontSize: 26, fontWeight: FontWeight.w700, color: AppPilotoColors().white()),
             ),
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_outlined),
+              icon: Icon(
+                Icons.arrow_back_ios_new_outlined,
+                color: AppPilotoColors().white(),
+              ),
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const DashBoardScreen()),
+                MaterialPageRoute(builder: (context) => const DashBoardScreen()),
               ),
             ),
           ),
@@ -88,29 +87,21 @@ class _CreateUserState extends State<CreateUser> {
                               controller: nameUserController,
                               text: 'Nome',
                               icon: Icons.account_circle_outlined,
-                              listTextInputFormatter: [
-                                LengthLimitingTextInputFormatter(20)
-                              ],
+                              listTextInputFormatter: [LengthLimitingTextInputFormatter(20)],
                             ),
                             const SizedBox(height: 10.0),
                             CreateContactFormField(
                               controller: userIdController,
                               text: 'Id',
                               icon: Icons.perm_identity_outlined,
-                              listTextInputFormatter: [
-                                phoneTextFormatter,
-                                LengthLimitingTextInputFormatter(20)
-                              ],
+                              listTextInputFormatter: [LengthLimitingTextInputFormatter(20)],
                             ),
                             const SizedBox(height: 10.0),
                             CreateContactFormField(
                               controller: phoneController,
                               text: 'Telefone',
-                              icon: Icons.email,
-                              listTextInputFormatter: [
-                                phoneTextFormatter,
-                                LengthLimitingTextInputFormatter(20)
-                              ],
+                              icon: Icons.phone,
+                              listTextInputFormatter: [phoneTextFormatter, LengthLimitingTextInputFormatter(20)],
                               keyboardType: TextInputType.datetime,
                             ),
                             const SizedBox(height: 10.0),
@@ -118,9 +109,7 @@ class _CreateUserState extends State<CreateUser> {
                               controller: emailController,
                               text: 'E-mail',
                               icon: Icons.email,
-                              listTextInputFormatter: [
-                                LengthLimitingTextInputFormatter(20)
-                              ],
+                              listTextInputFormatter: [LengthLimitingTextInputFormatter(20)],
                             ),
                           ],
                         ),
@@ -133,18 +122,14 @@ class _CreateUserState extends State<CreateUser> {
                               padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 15.0),
+                                  padding: const EdgeInsets.symmetric(vertical: 15.0),
                                   elevation: 8.0,
                                   backgroundColor: AppPilotoColors().primary(),
                                   shape: raisedButtonBorder(),
                                 ),
                                 onPressed: () {
-                                  ContactModel contactModel = ContactModel(
-                                      nameUser: nameUserController!.text,
-                                      userId: userIdController!.text,
-                                      phone: phoneController!.text,
-                                      email: emailController!.text);
+                                  ContactModel contactModel =
+                                      ContactModel(nameUser: nameUserController!.text, userId: userIdController!.text, phone: phoneController!.text, email: emailController!.text);
                                   contactCubit.createUser(contactModel);
                                 },
                                 child: Text(
@@ -164,9 +149,7 @@ class _CreateUserState extends State<CreateUser> {
                   ),
                 ),
               ),
-              state is CreateContactLoadingState
-                  ? const AppPilotoLoading()
-                  : const SizedBox.shrink()
+              state is CreateContactLoadingState ? const AppPilotoLoading() : const SizedBox.shrink()
             ],
           ),
         );

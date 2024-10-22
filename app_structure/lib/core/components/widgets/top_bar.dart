@@ -40,8 +40,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
                     elevation: 10,
                     shape: kBackButtonShape,
                     onPressed: () {
-                      MaterialPageRoute(
-                          builder: (context) => DashBoardScreen());
+                      MaterialPageRoute(builder: (context) => DashBoardScreen());
                     },
                     child: child,
                   ),
@@ -59,8 +58,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   child: InkWell(
                     onTap: () {
-                      MaterialPageRoute(
-                          builder: (context) => DashBoardScreen());
+                      MaterialPageRoute(builder: (context) => DashBoardScreen());
                     },
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width / 1.5,
@@ -127,7 +125,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Container(
             color: AppPilotoColors().primary(),
             child: AppBar(
-              
               centerTitle: true,
               leading: leading,
               title: Padding(padding: EdgeInsets.only(top: 10), child: title),
@@ -160,8 +157,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                       children: [
                                         CircleAvatar(
                                           radius: 20.0,
-                                          backgroundImage:
-                                              AssetImage('images/user.png'),
+                                          backgroundImage: AssetImage('images/user.png'),
                                         ),
                                         Container(
                                           padding: EdgeInsets.only(left: 15),
@@ -191,47 +187,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      withCircle! ? Size.fromHeight(60.0) : Size.fromHeight(50.0);
-}
-
-class RoundedAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const RoundedAppBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox.fromSize(
-      size: preferredSize,
-      child: LayoutBuilder(builder: (context, constraint) {
-        final width = constraint.maxWidth * 8;
-        return ClipRect(
-          child: OverflowBox(
-            maxHeight: double.infinity,
-            maxWidth: double.infinity,
-            child: SizedBox(
-              width: width,
-              height: width,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    bottom: width / 2 - preferredSize.height / 2),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: AppPilotoColors().primary(),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          color: AppPilotoColors().black(), blurRadius: 10.0)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(200.0);
+  Size get preferredSize => withCircle! ? Size.fromHeight(60.0) : Size.fromHeight(25.0);
 }

@@ -8,31 +8,34 @@ CreateContactFailure getFailureError(AppPilotoResponse? response) {
   if (response == null) return CreateContactUnkownError();
   switch (response.statusCode) {
     case 400:
-      return CreateContactRequestError(
-          message: response.statusMessage, data: response.data);
+      return CreateContactRequestError(message: response.statusMessage, data: response.data);
     case 401:
-      return CreateContactUnauthorizedError(
-          message: response.statusMessage, data: response.data);
+      return CreateContactUnauthorizedError(message: response.statusMessage, data: response.data);
     case 403:
-      return CreateContactForbiddenError(
-          message: response.statusMessage, data: response.data);
+      return CreateContactForbiddenError(message: response.statusMessage, data: response.data);
     case 404:
-      return CreateContactRequestError(
-          message: response.statusMessage, data: response.data);
+      return CreateContactRequestError(message: response.statusMessage, data: response.data);
     case 408:
-      return CreateContactRequestError(
-          message: response.statusMessage, data: response.data);
+      return CreateContactRequestError(message: response.statusMessage, data: response.data);
     case 500:
-      return CreateContactInternalError(
-          message: response.statusMessage, data: response.data);
+      return CreateContactInternalError(message: response.statusMessage, data: response.data);
     default:
       if (response.statusMessage.toUpperCase() == "OK") {
         response.statusMessage = "Ops, ocorreu um erro";
       }
-      return CreateContactUnkownError(
-          message: response.statusMessage,
-          code: response.statusCode.toString(),
-          data: response.data);
+      return CreateContactUnkownError(message: response.statusMessage, code: response.statusCode.toString(), data: response.data);
+  }
+}
+
+Future<bool> tryCreateContact(ContactModel contactModel) async {
+  try {
+    DocumentReference documentReference = FirebaseFirestore.instance.collection('crud').doc(contactModel.nameUser);
+
+    await documentReference.set(contactModel);
+
+    return true;
+  } catch (e) {
+    return false;
   }
 }
 
@@ -40,24 +43,11 @@ class CreateContactDatasourceImp implements CreateContactDatasource {
   CreateContactDatasourceImp();
 
   @override
-  Future<Either<CreateContactFailure, bool>> createUser(
-      ContactModel contactModel) async {
+  Future<Either<CreateContactFailure, bool>> createUser(ContactModel contactModel) async {
     try {
-      bool response = false;
-      DocumentReference documentReference = FirebaseFirestore.instance
-          .collection('crud')
-          .doc(contactModel.nameUser);
+      bool response = await tryCreateContact(contactModel);
 
-      Map<String, dynamic> students = ({
-        "nameUser": contactModel.nameUser,
-        "userId": contactModel.userId,
-        "phone": contactModel.phone,
-        "email": contactModel.email
-      });
-
-      documentReference.set(students).whenComplete(() => response = true);
-
-      if (response != false) {
+      if (response != true) {
         // final CreateContactFailure failure = getFailureError(response);
         return left(CreateContactUnkownError());
       } else {
@@ -68,3 +58,5 @@ class CreateContactDatasourceImp implements CreateContactDatasource {
     }
   }
 }
+
+ // Map<String, dynamic> students = ({"nameUser": contactModel.nameUser, "userId": contactModel.userId, "phone": contactModel.phone, "email": contactModel.email});

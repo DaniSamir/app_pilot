@@ -8,31 +8,33 @@ ContactListFailure getFailureError(AppPilotoResponse? response) {
   if (response == null) return ContactListUnkownError();
   switch (response.statusCode) {
     case 400:
-      return ContactListRequestError(
-          message: response.statusMessage, data: response.data);
+      return ContactListRequestError(message: response.statusMessage, data: response.data);
     case 401:
-      return ContactListUnauthorizedError(
-          message: response.statusMessage, data: response.data);
+      return ContactListUnauthorizedError(message: response.statusMessage, data: response.data);
     case 403:
-      return ContactListForbiddenError(
-          message: response.statusMessage, data: response.data);
+      return ContactListForbiddenError(message: response.statusMessage, data: response.data);
     case 404:
-      return ContactListRequestError(
-          message: response.statusMessage, data: response.data);
+      return ContactListRequestError(message: response.statusMessage, data: response.data);
     case 408:
-      return ContactListRequestError(
-          message: response.statusMessage, data: response.data);
+      return ContactListRequestError(message: response.statusMessage, data: response.data);
     case 500:
-      return ContactListInternalError(
-          message: response.statusMessage, data: response.data);
+      return ContactListInternalError(message: response.statusMessage, data: response.data);
     default:
       if (response.statusMessage.toUpperCase() == "OK") {
         response.statusMessage = "Ops, ocorreu um erro";
       }
-      return ContactListUnkownError(
-          message: response.statusMessage,
-          code: response.statusCode.toString(),
-          data: response.data);
+      return ContactListUnkownError(message: response.statusMessage, code: response.statusCode.toString(), data: response.data);
+  }
+}
+
+Future<bool> trydeleteContact(String nameUser) async {
+  try {
+    DocumentReference documentReference = FirebaseFirestore.instance.collection('crud').doc(nameUser);
+    await documentReference.delete();
+
+    return true;
+  } catch (e) {
+    return false;
   }
 }
 
@@ -40,24 +42,41 @@ class ContactListDatasourceImp implements ContactListDatasource {
   ContactListDatasourceImp();
 
   @override
-  Future<Either<ContactListFailure, List<ContactModel>?>>
-      getContactList() async {
+  Future<Either<ContactListFailure, List<ContactModel>?>> getContactList() async {
     try {
-      ContactModel? response;
       CollectionReference users = FirebaseFirestore.instance.collection('crud');
 
-      users.get().then((QuerySnapshot snapshot) async {
-        final ttt = snapshot.docs;
+      final contactListFirebase = await users.get().then((QuerySnapshot snapshot) {
+        List<ContactModel> contacts = snapshot.docs.map((doc) {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-        final lllll = ttt;
+          return ContactModel.fromMap(data);
+        }).toList();
+
+        return contacts;
       });
 
-      if (response!.email == null) {
-        // final ContactListFailure failure = getFailureError(response);
+      if (contactListFirebase.isEmpty) {
         return left(ContactListUnkownError());
       } else {
-        return right(
-            [ContactModel(email: '', nameUser: '', userId: '', phone: '')]);
+        List<ContactModel> contactList = contactListFirebase;
+
+        return right(contactList);
+      }
+    } catch (e) {
+      return left(ContactListUnkownError(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<ContactListFailure, bool>> deleteContact(String nameUser) async {
+    try {
+      bool response = await trydeleteContact(nameUser);
+
+      if (response != true) {
+        return left(ContactListUnkownError());
+      } else {
+        return right(response);
       }
     } catch (e) {
       return left(ContactListUnkownError(message: e.toString()));

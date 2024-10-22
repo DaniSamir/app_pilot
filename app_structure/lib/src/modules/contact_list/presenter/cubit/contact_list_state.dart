@@ -23,6 +23,13 @@ class ContactListSuccessState extends ContactListState {
   List<Object> get props => [];
 }
 
+class DeleteContactSuccessState extends ContactListState {
+  DeleteContactSuccessState();
+
+  @override
+  List<Object> get props => [];
+}
+
 class ContactListErrorState extends ContactListState {
   final ContactListFailure failure;
   ContactListErrorState(this.failure);

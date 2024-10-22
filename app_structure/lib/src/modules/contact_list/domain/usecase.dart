@@ -3,5 +3,6 @@ import 'package:app_piloto/src/modules/contact_list/index.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class ContactListUsecase {
-  Future<Either<ContactListFailure,List<ContactModel>?>> getContactList();
+  Future<Either<ContactListFailure, List<ContactModel>?>> getContactList();
+  Future<Either<ContactListFailure, bool>> deleteContact(String nameUser);
 }

@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class ContactModel extends Equatable {
-  String nameUser;
-  String userId;
-  String phone;
-  String email;
+  final String nameUser;
+  final String userId;
+  final String phone;
+  final String email;
 
-  ContactModel({
+  const ContactModel({
     required this.nameUser,
     required this.userId,
     required this.phone,
@@ -19,15 +19,24 @@ class ContactModel extends Equatable {
   List<Object> get props => [];
 
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {
+    return {
       "nameUser": nameUser,
       "userId": userId,
       "phone": phone,
-      "email": email
+      "email": email,
     };
-
-    return map;
   }
+
+  // static ContactModel fromMap(Map<String, dynamic> map) {
+  //   ContactModel contactModel = ContactModel(
+  //     nameUser: map['nameUser'] ?? '',
+  //     userId: map['userId'] ?? '',
+  //     phone: map['phone'] ?? '',
+  //     email: map['email'] ?? '',
+  //   );
+
+  //   return contactModel;
+  // }
 
   static ContactModel fromMap(Map<String, dynamic> map) {
     return ContactModel(
