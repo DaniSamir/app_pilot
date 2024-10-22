@@ -9,7 +9,7 @@ List<CarouselOption> carouselOptions(BuildContext context) {
     CarouselOption(
       icon: Icon(
         Icons.add_circle_rounded,
-        color: AppPilotoColors().primary(),
+        color: AppPilotoColors().orange(),
         size: 32,
       ),
       title: 'Adicionar Contatos',
@@ -32,23 +32,23 @@ List<CarouselOption> carouselOptions(BuildContext context) {
       description: "Adicione seus contatos mais\n próximos.",
       buttonText: 'Favoritar',
       buttonFunction: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const CreateUser()),
-        );
+        ///TODO: feature Favorites
       },
     ),
     CarouselOption(
       icon: Icon(
         Icons.list,
-        color: AppPilotoColors().primary(),
+        color: AppPilotoColors().orange(),
         size: 32,
       ),
       title: 'Lista de Contatos',
       description: "Veja todos os seus contatos.",
       buttonText: 'Ver',
       buttonFunction: () {
-        ///TODO: feature Favorites
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ContactList()),
+        );
       },
     ),
   ];

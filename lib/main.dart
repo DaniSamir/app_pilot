@@ -9,56 +9,30 @@ void main() async {
   await Firebase.initializeApp();
   await initCore();
   await registerMicroAppDependencies();
-  runApp(
-    FutureBuilder(
-      builder: (context, snap) {
+
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: Future.wait([
+        Firebase.initializeApp(),
+        initCore(),
+        registerMicroAppDependencies(),
+      ]),
+      builder: (context, snapshot) {
         return MaterialApp(
-          home: const DashBoardScreen(),
-          debugShowCheckedModeBanner: false,
+          home: const HomeScreen(),
           theme: ThemeData(
             brightness: Brightness.light,
             primaryColor: Colors.amber[500],
           ),
         );
       },
-      future: Future.wait(
-        [
-          Firebase.initializeApp(),
-          initCore(),
-          registerMicroAppDependencies(),
-        ],
-      ),
-    ),
-  );
+    );
+  }
 }
-
-// void main() async {
-//   Widget build(BuildContext context) {
-//     WidgetsFlutterBinding.ensureInitialized();
-
-//     return FutureBuilder(
-//       future: Future.wait(
-//         [
-//           Firebase.initializeApp(),
-//           initCore(),
-//           registerMicroAppDependencies(),
-//         ],
-//       ),
-//       builder: (ctx, snap) => ScreenUtilInit(
-//         designSize: const Size(375, 812),
-//         minTextAdapt: true,
-//         splitScreenMode: true,
-//         builder: (BuildContext context, Widget? child) {
-//           return MaterialApp(
-//             home: const DashBoardScreen(),
-//             debugShowCheckedModeBanner: false,
-//             theme: ThemeData(
-//               brightness: Brightness.light,
-//               primaryColor: Colors.amber[500],
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }

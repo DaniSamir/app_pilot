@@ -3,29 +3,27 @@ import 'package:flutter/material.dart';
 
 InputDecoration textFieldCustom(String labelText, Icon iconType) {
   return InputDecoration(
-    //filled: true,
     enabledBorder: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(
-        20.0,
-      )),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(20.0),
+      ),
       borderSide: BorderSide(color: AppPilotoColors().white(), width: 4.0),
     ),
-
-    focusedBorder:  OutlineInputBorder(
+    focusedBorder: OutlineInputBorder(
       borderRadius: const BorderRadius.all(Radius.circular(20.0)),
       borderSide: BorderSide(color: AppPilotoColors().white(), width: 2.0),
     ),
     prefixIcon: iconType,
     labelText: labelText,
-
-    labelStyle:  TextStyle(
+    labelStyle: TextStyle(
       fontSize: 16.0,
       color: AppPilotoColors().white(),
-  ));
+    ),
+  );
 }
 
 TextStyle simpleTextStyle() {
-  return  TextStyle(
+  return TextStyle(
     fontSize: 17.0,
     color: AppPilotoColors().white(),
   );

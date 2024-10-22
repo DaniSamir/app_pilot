@@ -37,7 +37,7 @@ class AppPilotoModal {
               child: ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll<Color>(
-                    AppPilotoColors().primary(),
+                    AppPilotoColors().orange(),
                   ),
                 ),
                 child: Text(
@@ -48,7 +48,7 @@ class AppPilotoModal {
                 ),
                 onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DashBoardScreen()),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                 ),
               ),
             ),
@@ -70,7 +70,7 @@ class AppPilotoModal {
               children: <Widget>[
                 Icon(
                   Icons.check_circle,
-                  color: AppPilotoColors().primary(),
+                  color: AppPilotoColors().orange(),
                   size: 45,
                 ),
                 const SizedBox(height: 15),
@@ -92,7 +92,7 @@ class AppPilotoModal {
               child: ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll<Color>(
-                    AppPilotoColors().primary(),
+                    AppPilotoColors().orange(),
                   ),
                 ),
                 child: Text(
@@ -103,7 +103,7 @@ class AppPilotoModal {
                 ),
                 onPressed: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DashBoardScreen()),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                 ),
               ),
             ),

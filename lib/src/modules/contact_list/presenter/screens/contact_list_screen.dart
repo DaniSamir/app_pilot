@@ -4,7 +4,7 @@ import 'package:app_piloto/core/components/widgets/top_bar.dart';
 import 'package:app_piloto/core/init/init_core.dart';
 import 'package:app_piloto/core/models/contact_model.dart';
 import 'package:app_piloto/src/modules/contact_list/presenter/index.dart';
-import 'package:app_piloto/src/modules/home/presenter/index.dart';
+import 'package:app_piloto/src/modules/home/presenter/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -58,7 +58,7 @@ class _ContactListState extends State<ContactList> {
               ),
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DashBoardScreen()),
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
               ),
             ),
           ),
@@ -77,48 +77,48 @@ class _ContactListState extends State<ContactList> {
                           shrinkWrap: true,
                           itemCount: contactModel?.length,
                           itemBuilder: (context, index) {
-                            return Expanded(
-                              child: ListTile(
-                                title: Padding(
-                                  padding: const EdgeInsets.only(left: 10.0, top: 10, right: 5),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      contactModel![index].nameUser,
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.comfortaa(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w300,
-                                        color: AppPilotoColors().primary(),
-                                      ),
+                            return ListTile(
+                              title: Padding(
+                                padding: const EdgeInsets.only(left: 10.0, top: 10, right: 5),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    contactModel![index].nameUser,
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.comfortaa(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300,
+                                      color: AppPilotoColors().orange(),
                                     ),
                                   ),
                                 ),
-                                trailing: IconButton(
-                                    onPressed: () => contactCubit.deleteContact(contactModel![index].nameUser), icon: Icon(Icons.delete, color: AppPilotoColors().primary())),
-                                subtitle: Padding(
-                                  padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      contactModel![index].phone,
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.comfortaa(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w300,
-                                        color: AppPilotoColors().primary(),
-                                      ),
+                              ),
+                              trailing: IconButton(
+                                onPressed: () => contactCubit.deleteContact(contactModel![index].nameUser),
+                                icon: Icon(Icons.delete, color: AppPilotoColors().orange()),
+                              ),
+                              subtitle: Padding(
+                                padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    contactModel![index].phone,
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.comfortaa(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300,
+                                      color: AppPilotoColors().orange(),
                                     ),
                                   ),
                                 ),
-                                leading: const CircleAvatar(
-                                  radius: 20.0,
-                                  backgroundImage: AssetImage('images/user.png'),
-                                ),
-                                onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const DashBoardScreen()),
-                                ),
+                              ),
+                              leading: const CircleAvatar(
+                                radius: 20.0,
+                                backgroundImage: AssetImage('images/user.png'),
+                              ),
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const HomeScreen()),
                               ),
                             );
                           },

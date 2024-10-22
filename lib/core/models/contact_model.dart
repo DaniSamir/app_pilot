@@ -27,17 +27,6 @@ class ContactModel extends Equatable {
     };
   }
 
-  // static ContactModel fromMap(Map<String, dynamic> map) {
-  //   ContactModel contactModel = ContactModel(
-  //     nameUser: map['nameUser'] ?? '',
-  //     userId: map['userId'] ?? '',
-  //     phone: map['phone'] ?? '',
-  //     email: map['email'] ?? '',
-  //   );
-
-  //   return contactModel;
-  // }
-
   static ContactModel fromMap(Map<String, dynamic> map) {
     return ContactModel(
       nameUser: map['nameUser'] ?? '',

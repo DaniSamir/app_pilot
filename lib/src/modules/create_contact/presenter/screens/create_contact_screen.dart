@@ -1,6 +1,7 @@
 import 'package:app_piloto/core/components/styles/app_piloto_colors.dart';
 import 'package:app_piloto/core/components/widgets/app_piloto_loading.dart';
 import 'package:app_piloto/core/components/widgets/input_formatter.dart';
+import 'package:app_piloto/core/components/widgets/modals.dart';
 import 'package:app_piloto/core/components/widgets/text_field_custom.dart';
 import 'package:app_piloto/core/components/widgets/top_bar.dart';
 import 'package:app_piloto/core/init/init_core.dart';
@@ -53,7 +54,7 @@ class _CreateUserState extends State<CreateUser> {
               ),
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DashBoardScreen()),
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
               ),
             ),
           ),
@@ -64,22 +65,20 @@ class _CreateUserState extends State<CreateUser> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const CircleAvatar(
-                        radius: 80.0,
-                        backgroundImage: AssetImage('images/user.png'),
+                      const Center(
+                        child: CircleAvatar(
+                          radius: 80.0,
+                          backgroundImage: AssetImage('images/user.png'),
+                        ),
                       ),
                       const SizedBox(height: 16),
                       Container(
                         height: 350,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: AppPilotoColors().primary(),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40.0),
-                              topRight: Radius.circular(40.0),
-                              bottomLeft: Radius.circular(40.0),
-                              bottomRight: Radius.circular(40.0),
-                            )),
+                          color: AppPilotoColors().orange(),
+                          borderRadius: const BorderRadius.all(Radius.circular(40.0)),
+                        ),
                         child: Column(
                           children: [
                             const SizedBox(height: 10.0),
@@ -124,7 +123,7 @@ class _CreateUserState extends State<CreateUser> {
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(vertical: 15.0),
                                   elevation: 8.0,
-                                  backgroundColor: AppPilotoColors().primary(),
+                                  backgroundColor: AppPilotoColors().orange(),
                                   shape: raisedButtonBorder(),
                                 ),
                                 onPressed: () {
@@ -144,12 +143,12 @@ class _CreateUserState extends State<CreateUser> {
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
-              state is CreateContactLoadingState ? const AppPilotoLoading() : const SizedBox.shrink()
+              state is CreateContactLoadingState ? const AppPilotoLoading() : const SizedBox.shrink(),
             ],
           ),
         );

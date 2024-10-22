@@ -1,4 +1,5 @@
 import 'package:app_piloto/core/components/styles/app_piloto_colors.dart';
+import 'package:app_piloto/core/components/widgets/app_piloto_loading.dart';
 import 'package:app_piloto/core/components/widgets/modals.dart';
 import 'package:app_piloto/core/components/widgets/top_bar.dart';
 import 'package:app_piloto/core/init/init_core.dart';
@@ -11,14 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DashBoardScreen extends StatefulWidget {
-  const DashBoardScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  _DashBoardScreenState createState() => _DashBoardScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _DashBoardScreenState extends State<DashBoardScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   // ====================================================== //
   late String nameUser;
   late String userId;
@@ -39,13 +40,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     documentReference.update(students).whenComplete(() => print('$nameUser updated'));
   }
 
-  // TODO Delete Data
-  deleteData() {
-    //DocumentReference documentReference = FirebaseFirestore.instance.collection('crud').doc(nameUser);
-
-    // delete data from Firebase
-  }
-  // ====================================================== //
 
   @override
   void initState() {
@@ -78,7 +72,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             ),
             leading: Icon(
               Icons.menu,
-              color: AppPilotoColors().primary(),
+              color: AppPilotoColors().orange(),
             ),
           ),
           body: Stack(
@@ -150,28 +144,26 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(bottom: 4),
-                                      child: Flexible(
-                                        child: Align(
-                                          alignment: Alignment.bottomCenter,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: option.buttonText.toUpperCase() == 'FAVORITAR' ? AppPilotoColors().gray() : AppPilotoColors().primary(),
-                                              borderRadius: const BorderRadius.only(
-                                                topLeft: Radius.circular(40.0),
-                                                topRight: Radius.circular(40.0),
-                                                bottomLeft: Radius.circular(40.0),
-                                                bottomRight: Radius.circular(40.0),
-                                              ),
+                                      child: Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: option.buttonText.toUpperCase() == 'FAVORITAR' ? AppPilotoColors().gray() : AppPilotoColors().orange(),
+                                            borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(40.0),
+                                              topRight: Radius.circular(40.0),
+                                              bottomLeft: Radius.circular(40.0),
+                                              bottomRight: Radius.circular(40.0),
                                             ),
-                                            child: TextButton(
-                                              onPressed: !option.deactivateButton ? option.buttonFunction : null,
-                                              child: Text(
-                                                option.buttonText,
-                                                style: GoogleFonts.comfortaa(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: AppPilotoColors().white(),
-                                                ),
+                                          ),
+                                          child: TextButton(
+                                            onPressed: !option.deactivateButton ? option.buttonFunction : null,
+                                            child: Text(
+                                              option.buttonText,
+                                              style: GoogleFonts.comfortaa(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppPilotoColors().white(),
                                               ),
                                             ),
                                           ),
@@ -190,13 +182,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         height: 260,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: AppPilotoColors().primary(),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40.0),
-                              topRight: Radius.circular(40.0),
-                              bottomLeft: Radius.circular(40.0),
-                              bottomRight: Radius.circular(40.0),
-                            )),
+                          color: AppPilotoColors().orange(),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(40.0),
+                            topRight: Radius.circular(40.0),
+                            bottomLeft: Radius.circular(40.0),
+                            bottomRight: Radius.circular(40.0),
+                          ),
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: Column(
@@ -236,19 +229,17 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                             ),
                                           ),
                                         ),
-                                        subtitle: Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                contactModel![index].phone,
-                                                textAlign: TextAlign.center,
-                                                style: GoogleFonts.comfortaa(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: AppPilotoColors().white(),
-                                                ),
+                                        subtitle: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              contactModel![index].phone,
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.comfortaa(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w300,
+                                                color: AppPilotoColors().white(),
                                               ),
                                             ),
                                           ),
@@ -270,6 +261,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ),
                 ),
               ),
+              state is ContactListLoadingState ? const AppPilotoLoading() : const SizedBox.shrink()
             ],
           ),
         );

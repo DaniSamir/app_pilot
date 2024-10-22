@@ -31,7 +31,7 @@ Future<bool> tryCreateContact(ContactModel contactModel) async {
   try {
     DocumentReference documentReference = FirebaseFirestore.instance.collection('crud').doc(contactModel.nameUser);
 
-    await documentReference.set(contactModel);
+    await documentReference.set(contactModel.toMap());
 
     return true;
   } catch (e) {
@@ -58,5 +58,3 @@ class CreateContactDatasourceImp implements CreateContactDatasource {
     }
   }
 }
-
- // Map<String, dynamic> students = ({"nameUser": contactModel.nameUser, "userId": contactModel.userId, "phone": contactModel.phone, "email": contactModel.email});
