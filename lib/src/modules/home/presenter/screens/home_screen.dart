@@ -4,8 +4,6 @@ import 'package:app_piloto/core/components/widgets/top_bar.dart';
 import 'package:app_piloto/core/init/init_core.dart';
 import 'package:app_piloto/core/models/contact_model.dart';
 import 'package:app_piloto/src/modules/contact_list/presenter/index.dart';
-import 'package:app_piloto/src/modules/contact_list/presenter/screens/contact_list_screen.dart';
-import 'package:app_piloto/src/modules/create_contact/presenter/screens/create_contact_screen.dart';
 import 'package:app_piloto/src/modules/home/presenter/screens/widgets/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,7 +41,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   // TODO Delete Data
   deleteData() {
-    DocumentReference documentReference = FirebaseFirestore.instance.collection('crud').doc(nameUser);
+    //DocumentReference documentReference = FirebaseFirestore.instance.collection('crud').doc(nameUser);
 
     // delete data from Firebase
   }
