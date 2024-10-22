@@ -1,4 +1,5 @@
 import 'package:app_piloto/core/components/styles/app_piloto_colors.dart';
+import 'package:app_piloto/core/components/widgets/modals.dart';
 import 'package:app_piloto/core/components/widgets/top_bar.dart';
 import 'package:app_piloto/core/init/init_core.dart';
 import 'package:app_piloto/core/models/contact_model.dart';
@@ -45,7 +46,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     DocumentReference documentReference = FirebaseFirestore.instance.collection('crud').doc(nameUser);
 
     // delete data from Firebase
-
   }
   // ====================================================== //
 
@@ -63,6 +63,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return BlocConsumer<ContactListCubit, ContactListState>(
       listener: (context, state) {
         if (state is ContactListErrorState) {
+          AppPilotoModal().showErrorModal(context, 'Ops! Ocorreu um erro. Tente novamente mais tarde!');
         } else if (state is ContactListSuccessState) {
           contactModel = state.contactModelList?.reversed.toList();
         }
@@ -133,16 +134,19 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                         ),
                                       ],
                                     ),
-                                    Center(
-                                      child: Text(
-                                        option.description,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.comfortaa(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppPilotoColors().black(),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Center(
+                                        child: Text(
+                                          option.description,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.comfortaa(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppPilotoColors().black(),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -153,7 +157,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                           alignment: Alignment.bottomCenter,
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              color: AppPilotoColors().primary(),
+                                              color: option.buttonText.toUpperCase() == 'FAVORITAR' ? AppPilotoColors().gray() : AppPilotoColors().primary(),
                                               borderRadius: const BorderRadius.only(
                                                 topLeft: Radius.circular(40.0),
                                                 topRight: Radius.circular(40.0),
@@ -210,79 +214,55 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                   ),
                                 ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.only(top: 5, left: 25, right: 0),
-                                child: Row(
-                                  children: [],
-                                ),
-                              ),
-                              StreamBuilder(
-                                stream:
-                                    //db.collection('crud').snapshots(),
-                                    //  db.collection('crud').snapshots(),
-                                    FirebaseFirestore.instance.collection('crud').snapshots(),
-                                // ignore: missing_return
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Column(
-                                      children: [
-                                        ListView.builder(
-                                          physics: const ClampingScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemCount: contactModel!.length,
-                                          controller: ScrollController(),
-                                          itemBuilder: (context, index) {
-                                            return ListTile(
-                                              title: Padding(
-                                                padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
-                                                child: Align(
-                                                  alignment: Alignment.centerLeft,
-                                                  child: Text(
-                                                    contactModel![index].nameUser,
-                                                    textAlign: TextAlign.center,
-                                                    style: GoogleFonts.comfortaa(
-                                                      fontSize: 12,
-                                                      fontWeight: FontWeight.w600,
-                                                      color: AppPilotoColors().white(),
-                                                    ),
-                                                  ),
-                                                ),
+                              Column(
+                                children: [
+                                  ListView.builder(
+                                    physics: const ClampingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: contactModel!.length,
+                                    controller: ScrollController(),
+                                    itemBuilder: (context, index) {
+                                      return ListTile(
+                                        title: Padding(
+                                          padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              contactModel![index].nameUser,
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.comfortaa(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                                color: AppPilotoColors().white(),
                                               ),
-                                              subtitle: Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
-                                                  child: Align(
-                                                    alignment: Alignment.centerLeft,
-                                                    child: Text(
-                                                      contactModel![index].phone,
-                                                      textAlign: TextAlign.center,
-                                                      style: GoogleFonts.comfortaa(
-                                                        fontSize: 12,
-                                                        fontWeight: FontWeight.w300,
-                                                        color: AppPilotoColors().white(),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              leading: const CircleAvatar(
-                                                radius: 16.0,
-                                                backgroundImage: AssetImage('images/user.png'),
-                                              ),
-                                            );
-                                          },
+                                            ),
+                                          ),
                                         ),
-                                      ],
-                                    );
-                                  } else {
-                                    return Align(
-                                      alignment: FractionalOffset.bottomCenter,
-                                      child: CircularProgressIndicator(
-                                        backgroundColor: AppPilotoColors().black(),
-                                      ),
-                                    );
-                                  }
-                                },
+                                        subtitle: Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                contactModel![index].phone,
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w300,
+                                                  color: AppPilotoColors().white(),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        leading: const CircleAvatar(
+                                          radius: 16.0,
+                                          backgroundImage: AssetImage('images/user.png'),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),

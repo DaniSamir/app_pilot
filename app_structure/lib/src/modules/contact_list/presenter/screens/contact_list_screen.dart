@@ -26,6 +26,7 @@ class _ContactListState extends State<ContactList> {
   }
 
   List<ContactModel>? contactModel = [];
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ContactListCubit, ContactListState>(
@@ -93,6 +94,8 @@ class _ContactListState extends State<ContactList> {
                                     ),
                                   ),
                                 ),
+                                trailing: IconButton(
+                                    onPressed: () => contactCubit.deleteContact(contactModel![index].nameUser), icon: Icon(Icons.delete, color: AppPilotoColors().primary())),
                                 subtitle: Padding(
                                   padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
                                   child: Align(

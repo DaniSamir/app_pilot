@@ -36,15 +36,15 @@ class ContactListCubit extends Cubit<ContactListState> {
     }
   }
 
-  Future<void> deleteContact() async {
+  Future<void> deleteContact(String nameUser) async {
     try {
       emit(ContactListLoadingState());
-      final result = await usecase.getContactList();
+      final result = await usecase.deleteContact(nameUser);
       result.fold((l) {
         emit(ContactListErrorState(l));
         return;
       }, (r) {
-       emit(DeleteContactSuccessState());
+        emit(DeleteContactSuccessState());
         return;
       });
     } catch (e) {

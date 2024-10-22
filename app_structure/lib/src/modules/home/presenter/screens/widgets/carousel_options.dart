@@ -25,11 +25,11 @@ List<CarouselOption> carouselOptions(BuildContext context) {
     CarouselOption(
       icon: Icon(
         Icons.favorite,
-        color: AppPilotoColors().primary(),
+        color: AppPilotoColors().gray(),
         size: 32,
       ),
-      title: 'Adicionar Contatos',
-      description: "Adicione contatos para não esquecer",
+      title: 'Favoritos',
+      description: "Adicione seus contatos mais\n próximos.",
       buttonText: 'Favoritar',
       buttonFunction: () {
         Navigator.push(
@@ -45,13 +45,10 @@ List<CarouselOption> carouselOptions(BuildContext context) {
         size: 32,
       ),
       title: 'Lista de Contatos',
-      description: "Adicione contatos para não esquecer",
+      description: "Veja todos os seus contatos.",
       buttonText: 'Ver',
       buttonFunction: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ContactList()),
-        );
+        ///TODO: feature Favorites
       },
     ),
   ];
