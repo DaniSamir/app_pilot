@@ -1,3 +1,4 @@
+import 'package:app_piloto/core/components/styles/app_piloto_colors.dart';
 import 'package:flutter/material.dart';
 
 class CarouselOption extends StatelessWidget {
@@ -21,15 +22,13 @@ class CarouselOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-      constraints: const BoxConstraints(
-        maxWidth: 300,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+      constraints: const BoxConstraints(maxWidth: 300),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           icon,
-          const SizedBox(height: 8.0),
+          const SizedBox(height: 8),
           Text(
             title,
             style: const TextStyle(
@@ -38,16 +37,16 @@ class CarouselOption extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 4.0),
+          const SizedBox(height: 4),
           Text(
             description,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey[600],
+              color: AppPilotoColors().black(),
             ),
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: 16),
           ElevatedButton(
             onPressed: deactivateButton ? null : buttonFunction,
             child: Text(buttonText),

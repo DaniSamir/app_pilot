@@ -19,14 +19,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Future.wait([
-        Firebase.initializeApp(),
-        initCore(),
-        registerMicroAppDependencies(),
-      ]),
+      future: Future.wait(
+        [
+          Firebase.initializeApp(),
+          initCore(),
+          registerMicroAppDependencies(),
+        ],
+      ),
       builder: (context, snapshot) {
         return MaterialApp(
           home: const HomeScreen(),
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             brightness: Brightness.light,
             primaryColor: Colors.amber[500],

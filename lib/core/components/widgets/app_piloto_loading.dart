@@ -11,10 +11,9 @@ class AppPilotoLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: LoadingAnimationWidget.flickr(
-          leftDotColor: AppPilotoColors().orange(),
-          rightDotColor: AppPilotoColors().orange(),
-          size: 30,
+        child: LoadingAnimationWidget.horizontalRotatingDots(
+          color: AppPilotoColors().purple(),
+          size: 60,
         ),
       ),
     );

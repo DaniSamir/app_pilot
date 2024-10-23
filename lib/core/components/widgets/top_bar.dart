@@ -26,33 +26,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.leading,
     this.actions,
-    this.elevation = 2.0,
+    this.elevation = 2,
     this.withCircle = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min, 
+      mainAxisSize: MainAxisSize.min,
       children: [
         Material(
           elevation: elevation,
-          color: AppPilotoColors().orange(),
+          color: AppPilotoColors().purple(),
           child: AppBar(
             centerTitle: true,
             leading: leading,
             title: Padding(padding: const EdgeInsets.only(top: 10), child: title),
-            backgroundColor: AppPilotoColors().orange(),
+            backgroundColor: AppPilotoColors().purple(),
             actions: actions,
           ),
         ),
         if (withCircle!)
           Container(
             decoration: BoxDecoration(
-              color: AppPilotoColors().orange(),
+              color: AppPilotoColors().purple(),
               borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(40.0),
-                bottomRight: Radius.circular(40.0),
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40),
               ),
             ),
             padding: const EdgeInsets.symmetric(vertical: 10),
@@ -60,7 +60,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const CircleAvatar(
-                  radius: 20.0,
+                  radius: 20,
                   backgroundImage: AssetImage('images/user.png'),
                 ),
                 const SizedBox(width: 15),
@@ -80,5 +80,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => withCircle! ? const Size.fromHeight(120.0) : const Size.fromHeight(60.0);
+  Size get preferredSize => withCircle! ? const Size.fromHeight(120) : const Size.fromHeight(60);
 }

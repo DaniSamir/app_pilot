@@ -1,7 +1,7 @@
 import 'package:app_piloto/core/components/styles/app_piloto_colors.dart';
 import 'package:app_piloto/src/modules/contact_list/index.dart';
 import 'package:app_piloto/src/modules/create_contact/index.dart';
-import 'package:app_piloto/src/modules/home/presenter/screens/widgets/caroussel_option.dart';
+import 'package:app_piloto/src/modules/home/presenter/screens/widgets/index.dart';
 import 'package:flutter/material.dart';
 
 List<CarouselOption> carouselOptions(BuildContext context) {
@@ -9,7 +9,7 @@ List<CarouselOption> carouselOptions(BuildContext context) {
     CarouselOption(
       icon: Icon(
         Icons.add_circle_rounded,
-        color: AppPilotoColors().orange(),
+        color: AppPilotoColors().purple(),
         size: 32,
       ),
       title: 'Adicionar Contatos',
@@ -38,7 +38,7 @@ List<CarouselOption> carouselOptions(BuildContext context) {
     CarouselOption(
       icon: Icon(
         Icons.list,
-        color: AppPilotoColors().orange(),
+        color: AppPilotoColors().purple(),
         size: 32,
       ),
       title: 'Lista de Contatos',

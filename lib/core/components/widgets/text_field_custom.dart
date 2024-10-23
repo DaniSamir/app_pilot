@@ -5,18 +5,18 @@ InputDecoration textFieldCustom(String labelText, Icon iconType) {
   return InputDecoration(
     enabledBorder: OutlineInputBorder(
       borderRadius: const BorderRadius.all(
-        Radius.circular(20.0),
+        Radius.circular(20),
       ),
-      borderSide: BorderSide(color: AppPilotoColors().white(), width: 4.0),
+      borderSide: BorderSide(color: AppPilotoColors().white(), width: 4),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-      borderSide: BorderSide(color: AppPilotoColors().white(), width: 2.0),
+      borderRadius: const BorderRadius.all(Radius.circular(20)),
+      borderSide: BorderSide(color: AppPilotoColors().white(), width: 2),
     ),
     prefixIcon: iconType,
     labelText: labelText,
     labelStyle: TextStyle(
-      fontSize: 16.0,
+      fontSize: 16,
       color: AppPilotoColors().white(),
     ),
   );
@@ -24,11 +24,11 @@ InputDecoration textFieldCustom(String labelText, Icon iconType) {
 
 TextStyle simpleTextStyle() {
   return TextStyle(
-    fontSize: 17.0,
+    fontSize: 17,
     color: AppPilotoColors().white(),
   );
 }
 
 RoundedRectangleBorder raisedButtonBorder() {
-  return RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0));
+  return RoundedRectangleBorder(borderRadius: BorderRadius.circular(16));
 }

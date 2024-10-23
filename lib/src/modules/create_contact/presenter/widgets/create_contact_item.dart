@@ -3,14 +3,14 @@ import 'package:app_piloto/core/components/widgets/text_field_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CreateContactFormField extends StatefulWidget {
+class CreateContactItem extends StatefulWidget {
   final TextEditingController? controller;
   final List<TextInputFormatter>? listTextInputFormatter;
   final IconData icon;
   final String text;
   final TextInputType? keyboardType;
 
-  const CreateContactFormField({
+  const CreateContactItem({
     required this.controller,
     this.listTextInputFormatter,
     required this.icon,
@@ -20,10 +20,10 @@ class CreateContactFormField extends StatefulWidget {
   });
 
   @override
-  State<CreateContactFormField> createState() => _CreateContactFormFieldState();
+  State<CreateContactItem> createState() => _CreateContactItemState();
 }
 
-class _CreateContactFormFieldState extends State<CreateContactFormField> {
+class _CreateContactItemState extends State<CreateContactItem> {
   bool isObscure = true;
 
   @override

@@ -65,67 +65,109 @@ class _ContactListState extends State<ContactList> {
           body: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 80, 20, 0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: contactModel?.length,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Padding(
-                                padding: const EdgeInsets.only(left: 10.0, top: 10, right: 5),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    contactModel![index].nameUser,
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.comfortaa(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300,
-                                      color: AppPilotoColors().orange(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              trailing: IconButton(
-                                onPressed: () => contactCubit.deleteContact(contactModel![index].nameUser),
-                                icon: Icon(Icons.delete, color: AppPilotoColors().orange()),
-                              ),
-                              subtitle: Padding(
-                                padding: const EdgeInsets.only(left: 10.0, top: 5, right: 5),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    contactModel![index].phone,
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.comfortaa(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300,
-                                      color: AppPilotoColors().orange(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              leading: const CircleAvatar(
-                                radius: 20.0,
-                                backgroundImage: AssetImage('images/user.png'),
-                              ),
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const HomeScreen()),
-                              ),
-                            );
-                          },
+                padding: const EdgeInsets.fromLTRB(24, 48, 24, 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) => Divider(
+                          color: AppPilotoColors().white(),
                         ),
+                        itemCount: contactModel!.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(color: AppPilotoColors().gray()),
+                            ),
+                            title: Container(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Nome: ${contactModel![index].nameUser}',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.comfortaa(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w800,
+                                    color: AppPilotoColors().purple(),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            trailing: IconButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                AppPilotoModal().showConfirmModal(context, 'Gostaria de excluir este contato? ', () {
+                                  contactCubit.deleteContact(contactModel![index].nameUser);
+                                }, 'Sim', Icon(Icons.warning, color: AppPilotoColors().yellow(), size: 48));
+                              },
+                              icon: Icon(Icons.delete, color: AppPilotoColors().purple()),
+                            ),
+                            subtitle: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      'Apelido: ${contactModel![index].userId}',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.comfortaa(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800,
+                                        color: AppPilotoColors().purple(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      'Tel.: ${contactModel![index].phone}',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.comfortaa(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800,
+                                        color: AppPilotoColors().purple(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      'Email: ${contactModel![index].email}',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.comfortaa(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800,
+                                        color: AppPilotoColors().purple(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            leading: const CircleAvatar(
+                              radius: 16,
+                              backgroundImage: AssetImage('images/user.png'),
+                            ),
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const HomeScreen()),
+                            ),
+                          );
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
