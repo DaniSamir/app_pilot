@@ -1,6 +1,7 @@
 import 'package:app_piloto/core/components/styles/app_piloto_colors.dart';
 import 'package:app_piloto/src/modules/contact_list/index.dart';
 import 'package:app_piloto/src/modules/create_contact/index.dart';
+import 'package:app_piloto/src/modules/favorites/presenter/index.dart';
 import 'package:app_piloto/src/modules/home/presenter/screens/widgets/index.dart';
 import 'package:flutter/material.dart';
 
@@ -8,31 +9,18 @@ List<CarouselOption> carouselOptions(BuildContext context) {
   return [
     CarouselOption(
       icon: Icon(
-        Icons.add_circle_rounded,
+        Icons.group_add_sharp,
         color: AppPilotoColors().purple(),
         size: 32,
       ),
-      title: 'Adicionar Contatos',
-      description: "Adicione contatos para não esquecer",
+      title: 'Adicionar contatos',
+      description: "Adicione contatos para não esquecer.",
       buttonText: 'Adicionar',
       buttonFunction: () {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const CreateUser()),
         );
-      },
-    ),
-    CarouselOption(
-      icon: Icon(
-        Icons.favorite,
-        color: AppPilotoColors().gray(),
-        size: 32,
-      ),
-      title: 'Favoritos',
-      description: "Adicione seus contatos mais\n próximos.",
-      buttonText: 'Favoritar',
-      buttonFunction: () {
-        ///TODO: feature Favorites
       },
     ),
     CarouselOption(
@@ -48,6 +36,22 @@ List<CarouselOption> carouselOptions(BuildContext context) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ContactList()),
+        );
+      },
+    ),
+    CarouselOption(
+      icon: Icon(
+        Icons.favorite,
+        color: AppPilotoColors().purple(),
+        size: 32,
+      ),
+      title: 'Favoritos',
+      description: "Veja a lista completa de favoritos.",
+      buttonText: 'Favoritar',
+      buttonFunction: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const FavoritesScreen()),
         );
       },
     ),

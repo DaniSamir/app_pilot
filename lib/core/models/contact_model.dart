@@ -1,16 +1,13 @@
 import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class ContactModel extends Equatable {
   final String nameUser;
-  final String userId;
   final String phone;
   final String email;
 
   const ContactModel({
     required this.nameUser,
-    required this.userId,
     required this.phone,
     required this.email,
   });
@@ -21,7 +18,6 @@ class ContactModel extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       "nameUser": nameUser,
-      "userId": userId,
       "phone": phone,
       "email": email,
     };
@@ -30,7 +26,6 @@ class ContactModel extends Equatable {
   static ContactModel fromMap(Map<String, dynamic> map) {
     return ContactModel(
       nameUser: map['nameUser'] ?? '',
-      userId: map['userId'] ?? '',
       phone: map['phone'] ?? '',
       email: map['email'] ?? '',
     );

@@ -29,10 +29,11 @@ class _CarouselWidgetState extends State<CarouselWidget> {
               decoration: BoxDecoration(
                 color: AppPilotoColors().white(),
                 borderRadius: BorderRadius.circular(15),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
                     blurRadius: 5,
-                    offset: Offset(0, 0),
+                    offset: const Offset(0, 0),
+                    color: AppPilotoColors().purple(),
                   ),
                 ],
               ),
@@ -80,7 +81,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 16,
                         decoration: BoxDecoration(
-                          color: option.buttonText.toUpperCase() == 'FAVORITAR' ? AppPilotoColors().gray() : AppPilotoColors().purple(),
+                          color: AppPilotoColors().purple(),
                           borderRadius: const BorderRadius.all(Radius.circular(40)),
                         ),
                         child: TextButton(
@@ -88,8 +89,8 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                           child: Text(
                             option.buttonText,
                             style: GoogleFonts.comfortaa(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w900,
                               color: AppPilotoColors().white(),
                             ),
                           ),

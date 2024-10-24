@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CreateContactForm extends StatefulWidget {
-  final TextEditingController? nameUserController;
-  final TextEditingController? userIdController;
-  final TextEditingController? phoneController;
-  final TextEditingController? emailController;
+  final TextEditingController nameUserController;
+  final TextEditingController phoneController;
+  final TextEditingController emailController;
+  final bool? readOnly;
 
   const CreateContactForm({
     super.key,
-    this.nameUserController,
-    this.userIdController,
-    this.phoneController,
-    this.emailController,
+    required this.nameUserController,
+    required this.phoneController,
+    required this.emailController,
+    this.readOnly,
   });
 
   @override
@@ -33,6 +33,7 @@ class _CreateContactFormState extends State<CreateContactForm> {
           controller: widget.nameUserController,
           text: 'Nome',
           icon: Icons.account_circle_outlined,
+          readOnly: widget.readOnly,
           listTextInputFormatter: [
             AppPilotoMaskTextInputFormatters.nameTextFormatter,
             LengthLimitingTextInputFormatter(20),
@@ -40,16 +41,10 @@ class _CreateContactFormState extends State<CreateContactForm> {
         ),
         const SizedBox(height: 10),
         CreateContactItem(
-          controller: widget.userIdController,
-          text: 'Apelido',
-          icon: Icons.perm_identity_outlined,
-          listTextInputFormatter: [LengthLimitingTextInputFormatter(20)],
-        ),
-        const SizedBox(height: 10),
-        CreateContactItem(
           controller: widget.phoneController,
           text: 'Telefone',
           icon: Icons.phone,
+          readOnly: widget.readOnly,
           listTextInputFormatter: [
             AppPilotoMaskTextInputFormatters.phoneTextFormatter,
             LengthLimitingTextInputFormatter(20),
@@ -61,6 +56,7 @@ class _CreateContactFormState extends State<CreateContactForm> {
           controller: widget.emailController,
           text: 'E-mail',
           icon: Icons.email,
+          readOnly: widget.readOnly,
           listTextInputFormatter: [
             AppPilotoMaskTextInputFormatters.emailTextFormatter,
             LengthLimitingTextInputFormatter(20),

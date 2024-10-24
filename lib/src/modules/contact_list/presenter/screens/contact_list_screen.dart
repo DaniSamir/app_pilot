@@ -18,7 +18,6 @@ class ContactList extends StatefulWidget {
 
 class _ContactListState extends State<ContactList> {
   ContactListCubit contactCubit = I.getDependency<ContactListCubit>();
-
   @override
   void initState() {
     super.initState();
@@ -44,7 +43,7 @@ class _ContactListState extends State<ContactList> {
           backgroundColor: AppPilotoColors().white(),
           appBar: CustomAppBar(
             title: Text(
-              'Todos os Contatos',
+              'Todos os contatos',
               style: GoogleFonts.comfortaa(
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
@@ -65,7 +64,7 @@ class _ContactListState extends State<ContactList> {
           body: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 48, 24, 0),
+                padding: const EdgeInsets.fromLTRB(24, 48, 24, 16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,32 +96,26 @@ class _ContactListState extends State<ContactList> {
                                 ),
                               ),
                             ),
+                            onTap: () {
+                              AppPilotoModal().showContact(
+                                context: context,
+                                dismissible: true,
+                                contactModel: contactModel![index],
+                              );
+                            },
                             trailing: IconButton(
                               padding: EdgeInsets.zero,
                               onPressed: () {
-                                AppPilotoModal().showConfirmModal(context, 'Gostaria de excluir este contato? ', () {
-                                  contactCubit.deleteContact(contactModel![index].nameUser);
-                                }, 'Sim', Icon(Icons.warning, color: AppPilotoColors().yellow(), size: 48));
+                                AppPilotoModal().showContact(
+                                  context: context,
+                                  dismissible: true,
+                                  contactModel: contactModel![index],
+                                );
                               },
-                              icon: Icon(Icons.delete, color: AppPilotoColors().purple()),
+                              icon: Icon(Icons.arrow_forward_ios_outlined, color: AppPilotoColors().purple()),
                             ),
                             subtitle: Column(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      'Apelido: ${contactModel![index].userId}',
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.comfortaa(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w800,
-                                        color: AppPilotoColors().purple(),
-                                      ),
-                                    ),
-                                  ),
-                                ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 8, bottom: 8),
                                   child: Align(
@@ -158,10 +151,6 @@ class _ContactListState extends State<ContactList> {
                             leading: const CircleAvatar(
                               radius: 16,
                               backgroundImage: AssetImage('images/user.png'),
-                            ),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const HomeScreen()),
                             ),
                           );
                         },

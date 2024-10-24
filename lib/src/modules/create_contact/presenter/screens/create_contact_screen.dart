@@ -20,11 +20,14 @@ class CreateUser extends StatefulWidget {
 
 class _CreateUserState extends State<CreateUser> {
   CreateContactCubit contactCubit = I.getDependency<CreateContactCubit>();
+  final incrementId = ValueNotifier<int>(0);
+  TextEditingController nameUserController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
-  TextEditingController? nameUserController = TextEditingController();
-  TextEditingController? userIdController = TextEditingController();
-  TextEditingController? phoneController = TextEditingController();
-  TextEditingController? emailController = TextEditingController();
+  bool checkAllFieldsFilled() {
+    return emailController.text.isNotEmpty && phoneController.text.isNotEmpty && emailController.text.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,7 @@ class _CreateUserState extends State<CreateUser> {
                       ),
                       const SizedBox(height: 16),
                       Container(
-                        height: 350,
+                        height: 275,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: AppPilotoColors().purple(),
@@ -80,7 +83,6 @@ class _CreateUserState extends State<CreateUser> {
                         child: CreateContactForm(
                           nameUserController: nameUserController,
                           phoneController: phoneController,
-                          userIdController: userIdController,
                           emailController: emailController,
                         ),
                       ),
@@ -98,9 +100,18 @@ class _CreateUserState extends State<CreateUser> {
                                   shape: raisedButtonBorder(),
                                 ),
                                 onPressed: () {
-                                  ContactModel contactModel =
-                                      ContactModel(nameUser: nameUserController!.text, userId: userIdController!.text, phone: phoneController!.text, email: emailController!.text);
-                                  contactCubit.createUser(contactModel);
+                                  if (checkAllFieldsFilled()) {
+                                    final newId = incrementId.value + 1;
+                                    newId.toString();
+                                    ContactModel contactModel = ContactModel(
+                                      nameUser: nameUserController.text,
+                                      phone: phoneController.text,
+                                      email: emailController.text,
+                                    );
+                                    contactCubit.createUser(contactModel);
+                                  } else {
+                                    AppPilotoModal().showErrorModal(context, 'Ops! Parece que há campos que não foram preenchidos!');
+                                  }
                                 },
                                 child: Text(
                                   'Enviar',

@@ -9,6 +9,7 @@ class CreateContactItem extends StatefulWidget {
   final IconData icon;
   final String text;
   final TextInputType? keyboardType;
+  final bool? readOnly;
 
   const CreateContactItem({
     required this.controller,
@@ -16,6 +17,7 @@ class CreateContactItem extends StatefulWidget {
     required this.icon,
     required this.text,
     this.keyboardType,
+    this.readOnly = false,
     super.key,
   });
 
@@ -32,6 +34,7 @@ class _CreateContactItemState extends State<CreateContactItem> {
       padding: const EdgeInsets.only(left: 15, top: 8, right: 15),
       child: TextFormField(
         controller: widget.controller,
+        readOnly: widget.readOnly ?? false,
         style: simpleTextStyle(),
         decoration: textFieldCustom(
           widget.text,
