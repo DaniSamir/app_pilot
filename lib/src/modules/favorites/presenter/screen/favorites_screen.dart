@@ -3,7 +3,6 @@ import 'package:app_piloto/core/components/widgets/modals.dart';
 import 'package:app_piloto/core/components/widgets/top_bar.dart';
 import 'package:app_piloto/core/init/init_core.dart';
 import 'package:app_piloto/core/models/contact_model.dart';
-import 'package:app_piloto/src/modules/contact_list/presenter/screens/contact_list_screen.dart';
 import 'package:app_piloto/src/modules/favorites/presenter/favorites_cubit/index.dart';
 import 'package:app_piloto/src/modules/home/presenter/screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   void initState() {
     super.initState();
-    contactModel = favoritesCubit.showFavorite();
+    contactModel = favoritesCubit.readFavorite();
   }
 
   @override
@@ -53,23 +52,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: contactModel!.isEmpty
-            ? Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                        onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const ContactList()),
-                            ),
-                        icon: Icon(Icons.arrow_circle_right_outlined, color: AppPilotoColors().purple(), size: 48))
-                  ],
-                ),
-              )
-            : const SizedBox.shrink(),
         body: Stack(
           children: [
             contactModel!.isNotEmpty
@@ -157,7 +139,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                             AppPilotoModal().showConfirmModal(context, 'Poxa, esperamos que esteja tudo bem!\n Gostaria de excluir este contato dos favoritos? ',
                                                 () {
                                               favoritesCubit.removeFavorite(contactModel![index]);
-                                              Navigator.pop(context);
+                                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FavoritesScreen()));
                                             }, Icon(Icons.sentiment_dissatisfied, color: AppPilotoColors().purple(), size: 48));
                                           },
                                           icon: Icon(Icons.heart_broken, color: AppPilotoColors().purple()),

@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    contactModel = contactCubit.showFavorite();
+    contactModel = contactCubit.readFavorite();
   }
 
   @override

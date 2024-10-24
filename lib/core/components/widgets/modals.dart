@@ -1,12 +1,10 @@
 import 'dart:ui';
 
 import 'package:app_piloto/core/components/styles/app_piloto_colors.dart';
-import 'package:app_piloto/core/components/widgets/index.dart';
 import 'package:app_piloto/core/init/init_core.dart';
 import 'package:app_piloto/core/models/contact_model.dart';
 import 'package:app_piloto/src/modules/contact_list/index.dart';
 import 'package:app_piloto/src/modules/create_contact/index.dart';
-import 'package:app_piloto/src/modules/favorites/domain/erros.dart';
 import 'package:app_piloto/src/modules/favorites/presenter/favorites_cubit/favorites_cubit.dart';
 import 'package:app_piloto/src/modules/favorites/presenter/index.dart';
 import 'package:app_piloto/src/modules/home/presenter/index.dart';
@@ -281,7 +279,7 @@ class AppPilotoModal {
     );
   }
 
-  Future<void> showContact({required BuildContext context, bool dismissible = true, required ContactModel contactModel}) async {
+  Future<void> showContact({required BuildContext context, bool dismissible = true, required ContactModel contactModel, required bool withIconFavorite}) async {
     ContactListCubit contactCubit = I.getDependency<ContactListCubit>();
     FavoritesCubit favoritosCubit = I.getDependency<FavoritesCubit>();
     return showWidgetWrapperModal(
@@ -330,18 +328,22 @@ class AppPilotoModal {
                   },
                   icon: Icon(Icons.delete_outline_outlined, color: AppPilotoColors().purple()),
                 ),
-                const SizedBox(width: 24),
-                IconButton(
-                  iconSize: 48,
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                 favoritosCubit.insertFavorite(contactModel);
-                    AppPilotoModal().showGenericModal(context, 'Eba! Contato favoritado com sucesso!', () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const FavoritesScreen()));
-                    }, Icon(Icons.auto_awesome_outlined, color: AppPilotoColors().purple(), size: 48), false, 'Ok', '');
-                  },
-                  icon: Icon(Icons.favorite_outline_sharp, color: AppPilotoColors().purple()),
-                ),
+                withIconFavorite
+                    ? 
+                    Padding(
+                        padding: const EdgeInsets.only(left: 24),
+                        child: IconButton(
+                          iconSize: 48,
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            favoritosCubit.insertFavorite(contactModel);
+                            AppPilotoModal().showGenericModal(context, 'Eba! Contato favoritado com sucesso!', () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                            }, Icon(Icons.auto_awesome_outlined, color: AppPilotoColors().purple(), size: 48), false, 'Ok', '');
+                          },
+                          icon: Icon(Icons.favorite_outline_sharp, color: AppPilotoColors().purple()),
+                        ),
+                      ): const SizedBox.shrink()
               ],
             )
           ],
