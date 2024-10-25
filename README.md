@@ -12,8 +12,7 @@ Documentação: <https://github.com/Flutterando/Clean-Dart/>
 ---
 
 ### Por dentro do APP_Piloto
-!
-[home_app_piloto](https://imgur.com/gXuWbLA)
+![home_app_piloto](https://i.imgur.com/gXuWbLA.png)
 
 No App Piloto você pode adicionar seus contatos, ver todos os seus contatos, edtiá-los e excluí-los.
 
