@@ -145,6 +145,7 @@ class _ContactListState extends State<ContactList> {
                                         child: Text(
                                           'Email: ${contactModel![index].email}',
                                           textAlign: TextAlign.center,
+                                          maxLines: 2,
                                           style: GoogleFonts.comfortaa(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w800,
@@ -155,36 +156,38 @@ class _ContactListState extends State<ContactList> {
                                     ),
                                   ],
                                 ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    const SizedBox(height: 2),
-                                    IconButton(
-                                      padding: EdgeInsets.zero,
-                                      iconSize: 32,
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) => UpdateContactScreen(
-                                              contactModel: contactModel![index],
-                                            ),
+                                contactModel![index].email == "exemplo@ex"
+                                    ? const SizedBox.shrink()
+                                    : Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          const SizedBox(height: 2),
+                                          IconButton(
+                                            padding: EdgeInsets.zero,
+                                            iconSize: 32,
+                                            onPressed: () {
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder: (context) => UpdateContactScreen(
+                                                    contactModel: contactModel![index],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            icon: Icon(Icons.edit, color: AppPilotoColors().purple()),
                                           ),
-                                        );
-                                      },
-                                      icon: Icon(Icons.edit, color: AppPilotoColors().purple()),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    IconButton(
-                                      padding: EdgeInsets.zero,
-                                      iconSize: 32,
-                                      onPressed: () {
-                                        _contactCubit.deleteContact(contactModel![index].userId!);
-                                      },
-                                      icon: Icon(Icons.delete, color: AppPilotoColors().purple()),
-                                    ),
-                                  ],
-                                ),
+                                          const SizedBox(height: 2),
+                                          IconButton(
+                                            padding: EdgeInsets.zero,
+                                            iconSize: 32,
+                                            onPressed: () {
+                                              _contactCubit.deleteContact(contactModel![index].userId!);
+                                            },
+                                            icon: Icon(Icons.delete, color: AppPilotoColors().purple()),
+                                          ),
+                                        ],
+                                      )
                               ],
                             ),
                             leading: const CircleAvatar(

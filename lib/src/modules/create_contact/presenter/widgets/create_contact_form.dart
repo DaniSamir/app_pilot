@@ -36,7 +36,7 @@ class _CreateContactFormState extends State<CreateContactForm> {
           readOnly: widget.readOnly,
           listTextInputFormatter: [
             AppPilotoMaskTextInputFormatters.nameTextFormatter,
-            LengthLimitingTextInputFormatter(20),
+            LengthLimitingTextInputFormatter(10),
           ],
         ),
         const SizedBox(height: 10),
@@ -59,7 +59,7 @@ class _CreateContactFormState extends State<CreateContactForm> {
           readOnly: widget.readOnly,
           listTextInputFormatter: [
             AppPilotoMaskTextInputFormatters.emailTextFormatter,
-            LengthLimitingTextInputFormatter(20),
+            LengthLimitingTextInputFormatter(10),
           ],
         ),
       ],
