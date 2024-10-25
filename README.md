@@ -21,18 +21,16 @@ Documentação:
 
 ![home_app_piloto](https://i.imgur.com/gXuWbLA.png)
 
-No App Piloto o usuário poderá adicionar seus contatos, ver todos os seus contatos, editá-los e excluí-los.
-
-Você gerencia todos os seus contatos em um só app.
+No app Piloto, o usuário poderá adicionar, visualizar, editar e excluir seus contatos. Gerencie todos os seus contatos em um só aplicativo.
 
 ### Tecnologias utilizadas 🔧
 
-Além do conceito de Clean Code colocado no projeto, foram implementadas as seguintes tecnologias: 
+Além do conceito de Clean Code inserido no projeto, foram implementadas as seguintes tecnologias: 
 
 - Bloc e Cubit para gerenciamento de estado;
 - Firebase para armazenamento de dados;
-- Biblioteca Get It para injeção de dependência; 
+- Biblioteca Get It para injeção de dependências; 
 
 ### Melhorias 🚧
 
-Em breve teremos uma nova funcionalidade aplicada chamada "Favoritos" nela o usuário poderá favoritar seus contatos mais próximos que aparece em sua tela inicial. Além de contar com uma tela dedicada apenas a estes contatos. 
+Em breve, teremos uma nova funcionalidade chamada "Favoritos", na qual o usuário poderá marcar como favoritos os contatos mais próximos que aparecerão na tela inicial. Além disso, haverá uma tela dedicada exclusivamente a esses contatos.
