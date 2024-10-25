@@ -1,16 +1,28 @@
-# project_impacta
+# app_piloto
 
-A new Flutter project.
+### Versão do Flutter:
+```
+Flutter 3.24.3 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 2663184aa7 (6 weeks ago) • 2024-09-11 16:27:48 -0500
+Engine • revision 36335019a8
+Tools • Dart 3.5.3 • DevTools 2.37.3
+```
+### Arquitetura (Clean Dart):
+Documentação: <https://github.com/Flutterando/Clean-Dart/>
+---
 
-## Getting Started
+### Por dentro do APP_Piloto
+!
+[home_app_piloto](https://imgur.com/gXuWbLA)
 
-This project is a starting point for a Flutter application.
+No App Piloto você pode adicionar seus contatos, ver todos os seus contatos, edtiá-los e excluí-los.
 
-A few resources to get you started if this is your first Flutter project:
+Você gerencia todos os seus contatos em um só app.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Tecnologias utilizadas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Além do conceiro de Clean Code colocado no projeto, foram implementadas as seguintes tecnologias: 
+
+- Bloc e Cubit para gerenciamento de estado;
+- Firebase para armazenamento de dados;
+- Biblioteca Get It para injeção de dependência; 

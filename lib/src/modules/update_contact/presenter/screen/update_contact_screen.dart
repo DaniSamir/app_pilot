@@ -23,6 +23,7 @@ class UpdateContactScreen extends StatefulWidget {
 class _UpdateContactScreenState extends State<UpdateContactScreen> {
   final UpdateContactCubit _updateContactCubit = I.getDependency<UpdateContactCubit>();
   final incrementId = ValueNotifier<int>(0);
+  
   TextEditingController nameUserController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
