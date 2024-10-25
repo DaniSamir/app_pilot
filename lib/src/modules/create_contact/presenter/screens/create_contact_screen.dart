@@ -20,7 +20,7 @@ class CreateUserScreen extends StatefulWidget {
 }
 
 class _CreateUserScreenState extends State<CreateUserScreen> {
-  CreateContactCubit _contactCubit = I.getDependency<CreateContactCubit>();
+  final CreateContactCubit _contactCubit = I.getDependency<CreateContactCubit>();
   final incrementId = ValueNotifier<int>(0);
   TextEditingController nameUserController = TextEditingController();
   TextEditingController phoneController = TextEditingController();

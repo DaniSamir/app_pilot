@@ -23,7 +23,7 @@ class UpdateContactScreen extends StatefulWidget {
 class _UpdateContactScreenState extends State<UpdateContactScreen> {
   final UpdateContactCubit _updateContactCubit = I.getDependency<UpdateContactCubit>();
   final incrementId = ValueNotifier<int>(0);
-  
+
   TextEditingController nameUserController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -94,8 +94,38 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
                         ),
                       ),
                       const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Clique no ícone para \nhabilitar a edição:',
+                            style: GoogleFonts.comfortaa(
+                              fontSize: 16,
+                              color: AppPilotoColors().purple(),
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              iconSize: 42,
+                              onPressed: () {
+                                setState(() {
+                                  readOnly = !readOnly;
+                                });
+                              },
+                              icon: Icon(
+                                Icons.edit,
+                                color: AppPilotoColors().purple(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
                       Container(
-                        height: 300,
+                        height: 250,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: AppPilotoColors().purple(),
@@ -122,7 +152,7 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
                                   shape: raisedButtonBorder(),
                                 ),
                                 onPressed: () async {
-                                  if (checkAllFieldsFilled()) {
+                                  if (checkAllFieldsFilled() && readOnly == false) {
                                     final newId = incrementId.value + 1;
                                     newId.toString();
                                     ContactModel contactModelUpdate = ContactModel(
@@ -141,17 +171,6 @@ class _UpdateContactScreenState extends State<UpdateContactScreen> {
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                readOnly = false;
-                              });
-                            },
-                            icon: Icon(
-                              Icons.edit,
-                              color: AppPilotoColors().purple(),
                             ),
                           ),
                         ],

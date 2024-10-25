@@ -29,7 +29,19 @@ class _ContactListState extends State<ContactList> {
 
   List<ContactModel>? contactModel = [];
   List<ContactModel?>? listOfPossibleFavorites = [];
-  
+
+  void _showContactDeletedSuccess() {
+    AppPilotoModal().showGenericModal(
+        context,
+        'Contato deletado com sucesso!',
+        () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            ),
+        Icon(Icons.sentiment_very_satisfied_sharp, color: AppPilotoColors().green(), size: 48),
+        false,
+        'Ok');
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ContactListCubit, ContactListState>(
@@ -42,7 +54,7 @@ class _ContactListState extends State<ContactList> {
           contactModel = state.contactModelList;
         } else if (state is DeleteContactSuccessState) {
           _contactCubit.resetState();
-          AppPilotoModal().showSuccessModal(context, 'Contato deletado com sucesso!');
+          _showContactDeletedSuccess();
         }
       },
       bloc: _contactCubit,
