@@ -81,7 +81,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 16,
                         decoration: BoxDecoration(
-                          color: AppPilotoColors().purple(),
+                          color: option.title == 'Favoritos' ? AppPilotoColors().gray() : AppPilotoColors().purple(),
                           borderRadius: const BorderRadius.all(Radius.circular(40)),
                         ),
                         child: TextButton(

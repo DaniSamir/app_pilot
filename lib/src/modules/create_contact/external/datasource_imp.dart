@@ -29,7 +29,7 @@ CreateContactFailure getFailureError(AppPilotoResponse? response) {
 
 Future<bool> tryCreateContact(ContactModel contactModel) async {
   try {
-    DocumentReference documentReference = FirebaseFirestore.instance.collection('crud').doc(contactModel.nameUser);
+    DocumentReference documentReference = FirebaseFirestore.instance.collection('crud').doc(contactModel.userId);
 
     await documentReference.set(contactModel.toMap());
 

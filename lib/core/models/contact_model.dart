@@ -5,12 +5,10 @@ class ContactModel extends Equatable {
   final String nameUser;
   final String phone;
   final String email;
+  final String? userId;
+  final bool? isFavorite;
 
-  const ContactModel({
-    required this.nameUser,
-    required this.phone,
-    required this.email,
-  });
+  const ContactModel({required this.nameUser, required this.phone, required this.email, this.userId, this.isFavorite});
 
   @override
   List<Object> get props => [];
@@ -20,6 +18,8 @@ class ContactModel extends Equatable {
       "nameUser": nameUser,
       "phone": phone,
       "email": email,
+      "userId": userId,
+      "isFavorite": isFavorite,
     };
   }
 
@@ -28,6 +28,8 @@ class ContactModel extends Equatable {
       nameUser: map['nameUser'] ?? '',
       phone: map['phone'] ?? '',
       email: map['email'] ?? '',
+      userId: map['userId'] ?? '',
+      isFavorite: map['isFavorite'] ?? false,
     );
   }
 

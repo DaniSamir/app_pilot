@@ -1,2 +1,1 @@
-export 'screen/favorites_screen.dart';
-export 'favorites_cubit/index.dart';
+export 'screens/favorites_screen.dart';

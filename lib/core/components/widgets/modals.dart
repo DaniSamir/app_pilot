@@ -1,13 +1,5 @@
 import 'dart:ui';
-
 import 'package:app_piloto/core/components/styles/app_piloto_colors.dart';
-import 'package:app_piloto/core/init/init_core.dart';
-import 'package:app_piloto/core/models/contact_model.dart';
-import 'package:app_piloto/src/modules/contact_list/index.dart';
-import 'package:app_piloto/src/modules/create_contact/index.dart';
-import 'package:app_piloto/src/modules/favorites/presenter/favorites_cubit/favorites_cubit.dart';
-import 'package:app_piloto/src/modules/favorites/presenter/index.dart';
-import 'package:app_piloto/src/modules/home/presenter/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -55,7 +47,7 @@ class AppPilotoModal {
                     color: AppPilotoColors().white(),
                   ),
                 ),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Navigator.of(context).pop(context),
               ),
             ),
           ],
@@ -112,10 +104,7 @@ class AppPilotoModal {
                       color: AppPilotoColors().white(),
                     ),
                   ),
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  ),
+                  onPressed: () => Navigator.of(context).pop(context),
                 ),
               ),
             ),
@@ -152,16 +141,17 @@ class AppPilotoModal {
                 padding: EdgeInsets.zero,
                 width: MediaQuery.sizeOf(context).width * 16,
                 child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll<Color>(
-                        AppPilotoColors().purple(),
-                      ),
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll<Color>(
+                      AppPilotoColors().purple(),
                     ),
-                    onPressed: onPressed,
-                    child: Text(
-                      'Sim',
-                      style: GoogleFonts.comfortaa(fontSize: 16, fontWeight: FontWeight.w700, color: AppPilotoColors().white()),
-                    )),
+                  ),
+                  onPressed: onPressed,
+                  child: Text(
+                    'Sim',
+                    style: GoogleFonts.comfortaa(fontSize: 16, fontWeight: FontWeight.w700, color: AppPilotoColors().white()),
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 8),
@@ -180,7 +170,7 @@ class AppPilotoModal {
                     'Não',
                     style: GoogleFonts.comfortaa(fontSize: 16, fontWeight: FontWeight.w700, color: AppPilotoColors().white()),
                   ),
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.of(context).pop(context),
                 ),
               ),
             ),
@@ -190,7 +180,8 @@ class AppPilotoModal {
     );
   }
 
-  Future<void> showGenericModal(BuildContext context, String text, Function()? onPressed, Icon iconData, bool hasSecondButton, String textButton, String? textSecondButton) async {
+  Future<void> showGenericModal(BuildContext context, String text, Function()? onPressed, Icon iconData, bool hasSecondButton, String textButton,
+      {String? textSecondButton}) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -246,7 +237,7 @@ class AppPilotoModal {
                           textSecondButton ?? '',
                           style: GoogleFonts.comfortaa(fontSize: 16, fontWeight: FontWeight.w700, color: AppPilotoColors().white()),
                         ),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => Navigator.of(context).pop(context),
                       ),
                     ),
                   )
@@ -275,79 +266,6 @@ class AppPilotoModal {
           children: [child],
         ),
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
-      ),
-    );
-  }
-
-  Future<void> showContact({required BuildContext context, bool dismissible = true, required ContactModel contactModel, required bool withIconFavorite}) async {
-    ContactListCubit contactCubit = I.getDependency<ContactListCubit>();
-    FavoritesCubit favoritosCubit = I.getDependency<FavoritesCubit>();
-    return showWidgetWrapperModal(
-      context,
-      dismissible: dismissible,
-      Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        child: Column(
-          children: [
-            const Center(
-              child: CircleAvatar(
-                radius: 42,
-                backgroundImage: AssetImage('images/user.png'),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              height: 250,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppPilotoColors().purple(),
-                borderRadius: const BorderRadius.all(Radius.circular(40)),
-              ),
-              child: Column(
-                children: [
-                  CreateContactForm(
-                      emailController: TextEditingController(text: contactModel.email),
-                      nameUserController: TextEditingController(text: contactModel.nameUser),
-                      phoneController: TextEditingController(text: contactModel.phone),
-                      readOnly: true)
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  iconSize: 48,
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    AppPilotoModal().showConfirmModal(context, 'Gostaria de excluir este contato? ', () {
-                      contactCubit.deleteContact(contactModel.nameUser);
-                    }, Icon(Icons.warning, color: AppPilotoColors().yellow(), size: 48));
-                  },
-                  icon: Icon(Icons.delete_outline_outlined, color: AppPilotoColors().purple()),
-                ),
-                withIconFavorite
-                    ? 
-                    Padding(
-                        padding: const EdgeInsets.only(left: 24),
-                        child: IconButton(
-                          iconSize: 48,
-                          padding: EdgeInsets.zero,
-                          onPressed: () {
-                            favoritosCubit.insertFavorite(contactModel);
-                            AppPilotoModal().showGenericModal(context, 'Eba! Contato favoritado com sucesso!', () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
-                            }, Icon(Icons.auto_awesome_outlined, color: AppPilotoColors().purple(), size: 48), false, 'Ok', '');
-                          },
-                          icon: Icon(Icons.favorite_outline_sharp, color: AppPilotoColors().purple()),
-                        ),
-                      ): const SizedBox.shrink()
-              ],
-            )
-          ],
-        ),
       ),
     );
   }
