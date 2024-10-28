@@ -1,12 +1,13 @@
 import 'package:app_piloto/core/depedencies/app_piloto_dependencies.dart';
 import 'package:app_piloto/core/init/init_core.dart';
+import 'package:app_piloto/src/firebase_options.dart';
 import 'package:app_piloto/src/modules/home/presenter/index.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initCore();
   await registerMicroAppDependencies();
 
